@@ -1,0 +1,40 @@
+<div class="min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-md relative z-10">
+
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center space-x-2 mb-4">
+        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+          <!-- Replace icon with SVG -->
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12l2 2l4 -4"></path>
+          </svg>
+        </div>
+        <span class="text-slate-900">Seytic</span>
+      </div>
+
+      <h1 class="text-slate-900 mb-2">
+        {% if mode == 'login' %}
+          Welcome Back
+        {% else %}
+          Create Account
+        {% endif %}
+      </h1>
+
+      <p class="text-slate-600">
+        {% if mode == 'login' %}
+          Sign in to access your dashboard
+        {% else %}
+          Get started with TicketFlow today
+        {% endif %}
+      </p>
+    </div>
+
+    <div class="p-8 shadow-xl border border-slate-200 rounded-xl bg-white">
+      <form method="POST" action="/auth" class="space-y-6">
+
+        {% if error %}
+          <div class="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700">
+            {{ error }}
+          </div>
+        {% endif %}

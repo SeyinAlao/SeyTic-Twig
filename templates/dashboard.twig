@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - SeyTic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+
+<!-- Navbar -->
+<nav class="bg-white border-b border-slate-200">
+  <div class="max-w-[1440px] mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+        <i data-lucide="ticket" class="text-white w-5 h-5"></i>
+      </div>
+      <span class="text-slate-900 font-semibold">SeyTic</span>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <a href="/tickets.php" class="text-slate-700 hover:text-slate-900">Tickets</a>
+      <a href="/logout.php" class="px-3 py-1 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-100">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Dashboard Content -->
+<div class="max-w-[1440px] mx-auto px-6 py-12">
+  <h1 class="text-3xl font-semibold text-slate-900 mb-8">
+    Welcome, {{ user_name }}
+</h1>
+
+
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <!-- Total Tickets -->
+    <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-200">
+      <h3 class="text-slate-600 mb-2">Total Tickets</h3>
+      <p class="text-2xl font-bold text-slate-900">{{ stats.total }}</p>
+    </div>
+
+    <!-- Open Tickets -->
+    <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-200">
+      <h3 class="text-slate-600 mb-2">Open Tickets</h3>
+      <p class="text-2xl font-bold text-green-600">{{ stats.open }}</p>
+    </div>
+
+    <!-- In Progress Tickets -->
+    <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-200">
+      <h3 class="text-slate-600 mb-2">In Progress</h3>
+      <p class="text-2xl font-bold text-amber-600">{{ stats.in_progress }}</p>
+    </div>
+
+    <!-- Closed Tickets -->
+    <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-200">
+      <h3 class="text-slate-600 mb-2">Closed Tickets</h3>
+      <p class="text-2xl font-bold text-gray-600">{{ stats.closed }}</p>
+    </div>
+  </div>
+
+  <div class="mt-12">
+    <a href="/tickets.php" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Manage Tickets</a>
+  </div>
+
+  <!-- Create Ticket Form -->
+<section class="py-10 bg-white mt-12 rounded-xl shadow-sm border border-slate-200 p-6">
+  <h2 class="text-xl font-semibold mb-4">Create a New Ticket</h2>
+  
+  {% if ticket_errors is defined %}
+    <div class="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700">
+      {% for error in ticket_errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <form action="/create_ticket.php" method="POST" class="space-y-4">
+    <div>
+      <label for="title" class="block text-sm font-medium text-slate-700">Title</label>
+      <input type="text" name="title" id="title" required class="mt-1 block w-full border border-slate-300 rounded-lg p-2"/>
+    </div>
+
+    <div>
+      <label for="description" class="block text-sm font-medium text-slate-700">Description</label>
+      <textarea name="description" id="description" class="mt-1 block w-full border border-slate-300 rounded-lg p-2"></textarea>
+    </div>
+
+    <div>
+      <label for="status" class="block text-sm font-medium text-slate-700">Status</label>
+      <select name="status" id="status" required class="mt-1 block w-full border border-slate-300 rounded-lg p-2">
+        <option value="open">Open</option>
+        <option value="in_progress">In Progress</option>
+        <option value="closed">Closed</option>
+      </select>
+    </div>
+
+    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg">Create Ticket</button>
+  </form>
+</section>
+
+
+</div>
+
+<script>lucide.createIcons()</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title ?? "SeyTic - Ticket Manager" }}</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-b from-slate-200 to-white">
+
+  {% block content %}{% endblock %}
+
+<script>
+  lucide.createIcons();
+</script>
+
+</body>
+</html>
